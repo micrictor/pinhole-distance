@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "pinhole-distance"
+version = "0.1.0"
+description = "A Python library for pinhole distance calculations."
+authors = ["Your Name <your.email@example.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.7"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
