@@ -11,8 +11,16 @@ pip install pinhole-distance
 ## Usage
 
 ```python
-from pinhole_distance import hello
-print(hello())
+# Calculate the distance to an object known to be 21" wide that is 70px wide in the image
+# Assumes you're using the USB pinhole camera defined in usb_pinhole.py
+from pinhole_distance import usb_pinhole
+
+distance = usb_pinhole.distance_to_object(
+    dimension='x',
+    actual_dimension=0.5334,
+    observed_dimension_px=70
+)
+print(f"Distance to object: {distance:.4f} meters")
 ```
 
 ## API Reference
