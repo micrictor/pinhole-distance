@@ -2,10 +2,14 @@
 
 A Python library for calculating the distance to an observed object in an
 image, given that you know, for either height (y) or width (x):
-*   The actual dimension of the object, in meters.
-*   The observed dimension of the object, in pixels.
+
+*   The actual measurement of the object, in meters.
+*   The observed measurement of the object, in pixels.
+    *   Most readily determined using an object recognition model like YOLO
+        and using the measurements of the bounding box.
 
 This module has pre-defined classes for doing these calculations for:
+
 *   `ov5647` - [Arducam 5MP 120 degree camera](https://www.arducam.com/b006604-arducam-for-raspberry-pi-zero-camera-module-wide-angle-120-1-4-inch-5mp-ov5647-spy-camera-with-flex-cable-for-pi-zero-and-pi-compute-module.html)
     *   Module compensates for the "fish-eye" effect, where images closer to the edge of the FOV will have the observed dimension distorted
 *   `rpi_cam_2` - [Raspberry Pi Camera Module 2](https://www.sparkfun.com/raspberry-pi-camera-module-v2.html)
@@ -78,53 +82,8 @@ Combines a `Lens` and a `Sensor` for distance and dimension calculations.
 - `object_dimension_at_distance(distance: float, observed_dimension_px: float) -> float`  
   Returns the actual dimension (in meters) of an object at a given distance (in meters), given its observed dimension in the image.
 
-**Example:**
-```python
-pkg = Package(lens, sensor)
-dist = pkg.distance_to_object(actual_dimension=0.2, observed_dimension_px=150)
-dimension = pkg.object_dimension_at_distance(distance=1.0, observed_dimension_px=150)
-```
-
-## Example: Using the OV5647 Package
-
-```python
-from pinhole_distance import ov5647
-
-distance = ov5647.distance_to_object(
-    dimension='y',
-    actual_dimension=0.1e-3,  # 0.1 mm in meters
-    observed_dimension_px=160
-)
-print(f"Distance to object: {distance:.4f} meters")
-```
-
-Output: `Distance to object: 0.0011 meters`, or 1.1mm.
-
-# Example: USB Pinhole with manually checked distances
-
-The following example computes the distance to a person with:
-*   Known width of 21" (0.5334m)
-*   Observed width of 70 pixels, using YOLO bounding box
-
-I know from measuring that the person was 5m away.
-
-```python
-from pinhole_distance import usb_pinhole
-
-distance = usb_pinhole.distance_to_object(
-    dimension='x',
-    actual_dimension=0.5334,
-    observed_dimension_px=70
-)
-print(f"Distance to object: {distance:.4f} meters")
-```
 
 The output is a distance of 4.8986 meters, or roughly a 2% error.
-
-## Publishing
-
-- Build: `python -m build`
-- Publish: `twine upload dist/*`
 
 ## License
 
