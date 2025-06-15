@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "pinhole-distance"
 version = "0.1.0"
-description = "A Python library for pinhole distance calculations."
-authors = ["Your Name <your.email@example.com>"]
+description = "A Python library for object distance calculations in images using pinhole projection."
+authors = ["Michael Torres"]
 license = "MIT"
 readme = "README.md"
 
