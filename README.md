@@ -1,6 +1,17 @@
 # pinhole-distance
 
-A Python library for pinhole distance calculations.
+A Python library for calculating the distance to an observed object in an
+image, given that you know, for either height (y) or width (x):
+*   The actual dimension of the object, in meters.
+*   The observed dimension of the object, in pixels.
+
+This module has pre-defined classes for doing these calculations for:
+*   `ov5647` - [Arducam 5MP 120 degree camera](https://www.arducam.com/b006604-arducam-for-raspberry-pi-zero-camera-module-wide-angle-120-1-4-inch-5mp-ov5647-spy-camera-with-flex-cable-for-pi-zero-and-pi-compute-module.html)
+    *   Module compensates for the "fish-eye" effect, where images closer to the edge of the FOV will have the observed dimension distorted
+*   `rpi_cam_2` - [Raspberry Pi Camera Module 2](https://www.sparkfun.com/raspberry-pi-camera-module-v2.html)
+*   `usb_pinhole` - [SVPRO 3.7mm Pinhole Lens USB Camera](https://www.amazon.com/SVPRO-Camera-Module-Illumination-Pinhole/dp/B07CF7ZTY1)
+
+Users can also define their own camera packages using the `Sensor`, `Lens`, and `Package` classes.
 
 ## Installation
 
