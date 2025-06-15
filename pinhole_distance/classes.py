@@ -90,7 +90,7 @@ class Package:
         Returns:
             float: The estimated distance to the object (in meters).
         """
-        pixel_dim_m = self.lens.pixel_width_um * 1e-6 if dimension in ['x', 'w'] else self.sensor.pixel_height_um * 1e-6
+        pixel_dim_m = self.sensor.pixel_width_um * 1e-6 if dimension in ['x', 'w'] else self.sensor.pixel_height_um * 1e-6
         focal_length_m = self.lens.focal_length * 1e-3
         distance = (actual_dimension * focal_length_m) / (observed_dimension_px * pixel_dim_m)
         if self.lens.distortion_table and center_px:

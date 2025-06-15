@@ -66,6 +66,48 @@ dist = pkg.distance_to_object(actual_dimension=0.2, observed_dimension_px=150)
 dimension = pkg.object_dimension_at_distance(distance=1.0, observed_dimension_px=150)
 ```
 
+## Example: Using the Arducam OV5647 Package
+
+The following example computes the distance to a 1.6 micrometer tall object, given that
+the object is 1px tall in the image.
+
+Since the pixel height is 0.0016mm, we would expect this to be very close to zero, with
+the only variance due to the focal length of the lens (0.95mm).
+
+```python
+from pinhole_distance.ov5647 import PACKAGE
+
+distance = PACKAGE.distance_to_object(
+    dimension='y',
+    actual_dimension=1.6e-6,
+    observed_dimension_px=1
+)
+print(f"Distance to object: {distance:.4f} meters")
+```
+
+Output: `Distance to object: 0.0011 meters`, or 1.1mm.
+
+# Example: USB Pinhole with manually checked distances
+
+The following example computes the distance to a person with:
+*   Known width of 21" (0.5334m)
+*   Observed width of 70 pixels, using YOLO bounding box
+
+I know from measuring that the person was 5m away.
+
+```
+from pinhole_distance.usb_pinhole import PACKAGE as usb_pinhole
+
+distance = usb_pinhole.distance_to_object(
+    dimension='x',
+    actual_dimension=0.5334,
+    observed_dimension_px=70
+)
+print(f"Distance to object: {distance:.4f} meters")
+```
+
+The output is a distance of 4.899 meters, or roughly a 2% error.
+
 ## Publishing
 
 - Build: `python -m build`
